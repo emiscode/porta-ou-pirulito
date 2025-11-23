@@ -46,7 +46,7 @@ export default function ModalWin({ aberto, palavra, onReiniciar }: ModalWinProps
             />
           </div>
           {/* Pirulito ao lado da menina */}
-          <div className="absolute right-1 top-1/2 transform -translate-y-1/2 translate-x-[-20px] md:translate-x-[-30px]">
+          <div className="absolute right-2 top-1/2 transform -translate-y-1/2 translate-x-[-20px] md:translate-x-[-30px]">
             <Lollipop foiPegado={false} />
           </div>
         </div>

@@ -5,9 +5,7 @@ interface LollipopProps {
 }
 
 export default function Lollipop({ foiPegado }: LollipopProps) {
-  if (foiPegado) {
-    return null; // Não renderiza se já foi pego
-  }
+  
 
   return (
     <div className="relative">

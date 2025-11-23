@@ -141,11 +141,11 @@ export default function GamePage() {
               </div>
             )}
             {/* Pirulito fica do lado de fora da porta (à direita) */}
-            {!pirulitoPego && (
+            
               <div className="absolute top-1/2 right-0 transform translate-x-full translate-y-[-50%] ml-4 md:ml-8 z-10">
                 <Lollipop foiPegado={pirulitoPego} />
               </div>
-            )}
+            
           </div>
         </div>
 
