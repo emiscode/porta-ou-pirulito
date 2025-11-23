@@ -38,7 +38,7 @@ export default function ModalWin({ aberto, palavra, onReiniciar }: ModalWinProps
         <div className="flex justify-center items-center py-6 relative">
           <div className="relative w-32 h-40 md:w-40 md:h-48">
             <Image
-              src="/images/girl.jpg"
+              src="/images/girl.png"
               alt="Menina feliz"
               fill
               className="object-contain"

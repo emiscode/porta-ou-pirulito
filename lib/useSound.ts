@@ -83,39 +83,56 @@ export function useSound() {
     try {
       const audioContext = getAudioContext();
       
-      // Cria um som de fundo suave e repetitivo que toca em loop
-      const createBackgroundTone = () => {
+      // Melodia alegre e divertida para o jogo
+      // Sequência de notas em escala maior (C, D, E, F, G, A, B, C)
+      const melody = [
+        { freq: 261.63, duration: 0.3 }, // C4
+        { freq: 293.66, duration: 0.3 }, // D4
+        { freq: 329.63, duration: 0.3 }, // E4
+        { freq: 349.23, duration: 0.3 }, // F4
+        { freq: 392.00, duration: 0.4 }, // G4 (mais longa)
+        { freq: 440.00, duration: 0.3 }, // A4
+        { freq: 493.88, duration: 0.3 }, // B4
+        { freq: 523.25, duration: 0.5 }, // C5 (mais longa)
+      ];
+
+      const playMelody = () => {
         if (!backgroundGainRef.current) return; // Para se foi solicitado parar
         
-        const oscillator = audioContext.createOscillator();
-        const gainNode = audioContext.createGain();
-
-        oscillator.connect(gainNode);
-        gainNode.connect(audioContext.destination);
-
-        // Nota suave e baixa
-        oscillator.frequency.value = 220; // Lá (A3)
-        oscillator.type = "sine";
-        gainNode.gain.value = 0.05; // Volume muito baixo para não incomodar
-
         const startTime = audioContext.currentTime;
-        oscillator.start(startTime);
-        
-        // Para após 4 segundos e reinicia
-        oscillator.stop(startTime + 4);
-        
-        oscillator.onended = () => {
-          // Reinicia o som após um pequeno intervalo
-          if (backgroundGainRef.current) {
-            setTimeout(() => {
-              if (backgroundGainRef.current) {
-                createBackgroundTone();
-              }
-            }, 500);
-          }
-        };
+        let currentTime = startTime;
 
-        backgroundOscillatorsRef.current.push(oscillator);
+        melody.forEach((note, index) => {
+          const oscillator = audioContext.createOscillator();
+          const gainNode = audioContext.createGain();
+
+          oscillator.connect(gainNode);
+          gainNode.connect(backgroundGainRef.current!);
+
+          oscillator.frequency.value = note.freq;
+          oscillator.type = "sine"; // Som suave
+
+          // Volume com fade in/out suave
+          gainNode.gain.setValueAtTime(0, currentTime);
+          gainNode.gain.linearRampToValueAtTime(0.08, currentTime + 0.05); // Volume baixo
+          gainNode.gain.linearRampToValueAtTime(0.08, currentTime + note.duration - 0.05);
+          gainNode.gain.linearRampToValueAtTime(0, currentTime + note.duration);
+
+          oscillator.start(currentTime);
+          oscillator.stop(currentTime + note.duration);
+
+          currentTime += note.duration + 0.05; // Pequena pausa entre notas
+
+          backgroundOscillatorsRef.current.push(oscillator);
+        });
+
+        // Reinicia a melodia após terminar
+        const totalDuration = melody.reduce((sum, note) => sum + note.duration + 0.05, 0);
+        setTimeout(() => {
+          if (backgroundGainRef.current) {
+            playMelody();
+          }
+        }, totalDuration * 1000);
       };
 
       // Cria o gain node principal
@@ -123,8 +140,8 @@ export function useSound() {
       backgroundGainRef.current.connect(audioContext.destination);
       backgroundGainRef.current.gain.value = 1;
 
-      // Inicia o primeiro ciclo
-      createBackgroundTone();
+      // Inicia a melodia
+      playMelody();
     } catch (error) {
       console.warn("Erro ao iniciar música de fundo:", error);
     }

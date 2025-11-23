@@ -15,9 +15,9 @@ export default function Girl({ atravessou }: GirlProps) {
         ${atravessou ? "transform translate-x-0" : ""}
       `}
     >
-      <div className="relative w-24 h-32 md:w-32 md:h-40">
+      <div className="relative w-28 h-36 md:w-36 md:h-48">
         <Image
-          src="/images/girl.jpg"
+          src="/images/girl.png"
           alt="Menina"
           fill
           className="object-contain"
