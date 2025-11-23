@@ -51,14 +51,17 @@ export default function ModalWin({ aberto, palavra, onReiniciar }: ModalWinProps
               {/* Braço esquerdo */}
               <div className="absolute -left-2 top-3 w-4 h-10 bg-pink-300 rounded-full" />
               
+              {/* Vestido */}
+              <div className="absolute bottom-0 left-0 right-0 h-10 bg-purple-400 rounded-b-lg z-0" />
+              
               {/* Braço direito segurando o pirulito */}
-              <div className="absolute -right-6 top-2 w-4 h-12 bg-pink-300 rounded-full transform rotate-12">
+              <div className="absolute -right-6 top-2 w-4 h-12 bg-pink-300 rounded-full transform rotate-12 z-10">
                 {/* Pirulito na mão */}
-                <div className="absolute -top-8 -right-2">
+                <div className="absolute -top-8 -right-2 z-20">
                   {/* Palito */}
                   <div className="w-1 h-12 bg-amber-700 mx-auto" />
                   {/* Pirulito */}
-                  <div className="w-12 h-12 bg-gradient-to-br from-pink-400 via-red-400 to-pink-500 rounded-full border-4 border-white shadow-lg relative">
+                  <div className="w-12 h-12 bg-gradient-to-br from-pink-400 via-red-400 to-pink-500 rounded-full border-4 border-white shadow-lg relative z-30">
                     {/* Espirais decorativas */}
                     <div className="absolute inset-2 border-2 border-white rounded-full opacity-50" />
                     <div className="absolute inset-3 border-2 border-white rounded-full opacity-30" />
@@ -67,9 +70,6 @@ export default function ModalWin({ aberto, palavra, onReiniciar }: ModalWinProps
                   </div>
                 </div>
               </div>
-              
-              {/* Vestido */}
-              <div className="absolute bottom-0 left-0 right-0 h-10 bg-purple-400 rounded-b-lg" />
             </div>
 
             {/* Pernas */}

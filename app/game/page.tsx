@@ -106,10 +106,10 @@ export default function GamePage() {
       <div className="max-w-4xl mx-auto">
         {/* Cabeçalho */}
         <div className="text-center mb-6">
-          <h1 className="text-4xl md:text-5xl font-bold text-primary mb-2">
+          <h1 className="text-2xl font-bold text-primary mb-2">
             PORTA OU PIRULITO
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground">
+          <p className="text-lg text-muted-foreground">
             ADIVINHE A PALAVRA ANTES DA PORTA SE FECHAR!
           </p>
         </div>
