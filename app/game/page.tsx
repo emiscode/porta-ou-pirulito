@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { selecionarPalavraAleatoria, calcularErrosMaximos, type Categoria } from "@/lib/game-constants";
+import { useSound } from "@/lib/useSound";
 import WordDisplay from "./components/WordDisplay";
 import Keyboard from "./components/Keyboard";
 import Door from "./components/Door";
@@ -23,6 +24,7 @@ export default function GamePage() {
   const [estadoJogo, setEstadoJogo] = useState<EstadoJogo>("jogando");
   const [atravessou, setAtravessou] = useState(false);
   const [pirulitoPego, setPirulitoPego] = useState(false);
+  const { playSound, startBackgroundMusic, stopBackgroundMusic } = useSound();
 
   const iniciarNovoJogo = useCallback(() => {
     const novaPalavra = selecionarPalavraAleatoria();
@@ -38,7 +40,14 @@ export default function GamePage() {
 
   useEffect(() => {
     iniciarNovoJogo();
-  }, [iniciarNovoJogo]);
+    // Inicia música de fundo quando o componente é montado
+    //startBackgroundMusic();
+    
+    // Limpa música de fundo quando o componente é desmontado
+    return () => {
+      stopBackgroundMusic();
+    };
+  }, [iniciarNovoJogo, startBackgroundMusic, stopBackgroundMusic]);
 
   const estadoPorta = 
     estadoJogo === "vitoria" 
@@ -61,8 +70,10 @@ export default function GamePage() {
     // Verifica se a letra está na palavra
     if (palavraLower.includes(letraLower)) {
       setLetrasAcertadas((prev) => new Set([...prev, letraLower]));
+      playSound("correct");
     } else {
       setLetrasErradas((prev) => new Set([...prev, letraLower]));
+      playSound("wrong");
     }
   };
 
@@ -84,6 +95,7 @@ export default function GamePage() {
 
     if (todasLetrasAcertadas) {
       setEstadoJogo("vitoria");
+      playSound("win");
       // Animações de vitória: porta abre, menina atravessa e pega o pirulito
       setTimeout(() => setAtravessou(true), 500);
       setTimeout(() => setPirulitoPego(true), 2000);
@@ -96,6 +108,7 @@ export default function GamePage() {
 
     if (letrasErradas.size >= errosMaximos) {
       setEstadoJogo("derrota");
+      playSound("lose");
     }
   }, [letrasErradas.size, errosMaximos, estadoJogo]);
 
@@ -106,16 +119,16 @@ export default function GamePage() {
       <div className="max-w-4xl mx-auto">
         {/* Cabeçalho */}
         <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold text-primary mb-2">
+          <h1 className="text-2xl font-bold text-primary">
             PORTA OU PIRULITO
           </h1>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-md text-muted-foreground">
             ADIVINHE A PALAVRA ANTES DA PORTA SE FECHAR!
           </p>
         </div>
 
         {/* Porta com Menina e Pirulito */}
-        <div className="mb-8 relative flex items-center justify-center">
+        <div className="mb-6 relative flex items-center justify-center">
           <div className="relative w-full max-w-md mx-auto">
             <Door estadoPorta={estadoPorta}>
               {/* Menina fica dentro e atrás da porta quando não atravessou */}
