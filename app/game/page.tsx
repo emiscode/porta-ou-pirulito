@@ -45,8 +45,8 @@ export default function GamePage() {
   const verificarLetra = (letra: string) => {
     if (estadoJogo !== "jogando") return;
 
-    const letraLower = letra.toLowerCase();
-    const palavraLower = palavraSelecionada.toLowerCase();
+    const letraLower = letra.toUpperCase();
+    const palavraLower = palavraSelecionada.toUpperCase();
 
     // Verifica se a letra já foi usada
     if (letrasAcertadas.has(letraLower) || letrasErradas.has(letraLower)) {
@@ -65,7 +65,7 @@ export default function GamePage() {
   useEffect(() => {
     if (estadoJogo !== "jogando" || palavraSelecionada === "") return;
 
-    const palavraLower = palavraSelecionada.toLowerCase();
+    const palavraLower = palavraSelecionada.toUpperCase();
     const letrasUnicas = new Set(
       palavraLower.split("").filter((l) => l !== " " && l !== "-")
     );
@@ -99,14 +99,14 @@ export default function GamePage() {
         {/* Cabeçalho */}
         <div className="text-center mb-6">
           <h1 className="text-4xl md:text-5xl font-bold text-primary mb-2">
-            Porta ou Pirulito
+            PORTA OU PIRULITO
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground">
-            Adivinhe a palavra antes da porta se fechar!
+            ADIVINHE A PALAVRA ANTES DA PORTA SE FECHAR!
           </p>
           <div className="mt-4">
             <span className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full font-semibold">
-              {categoria === "fruta" ? "🍎 Fruta" : "🐾 Animal"}
+              {categoria === "fruta" ? "🍎 FRUTA" : "🐾 ANIMAL"}
             </span>
           </div>
         </div>
@@ -140,7 +140,7 @@ export default function GamePage() {
             size="lg"
             className="text-lg"
           >
-            🔄 Novo Jogo
+            🔄 NOVO JOGO
           </Button>
         </div>
 

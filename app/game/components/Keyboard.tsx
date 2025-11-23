@@ -19,7 +19,7 @@ export default function Keyboard({
   disabled = false,
 }: KeyboardProps) {
   const getButtonClass = (letra: string) => {
-    const letraLower = letra.toLowerCase();
+    const letraLower = letra.toUpperCase();
     if (letrasAcertadas.has(letraLower)) {
       return "bg-green-500 text-white hover:bg-green-600";
     }
@@ -32,7 +32,7 @@ export default function Keyboard({
   return (
     <div className="flex flex-wrap justify-center gap-2 md:gap-3 max-w-2xl mx-auto my-6">
       {LETRAS.map((letra) => {
-        const letraLower = letra.toLowerCase();
+        const letraLower = letra.toUpperCase();
         const isUsada = letrasUsadas.has(letraLower) || letrasAcertadas.has(letraLower);
 
         return (

@@ -7,7 +7,7 @@ interface WordDisplayProps {
 
 export default function WordDisplay({ palavra, letrasAcertadas }: WordDisplayProps) {
   const exibirLetra = (letra: string) => {
-    return letrasAcertadas.has(letra.toLowerCase()) ? letra : "_";
+    return letrasAcertadas.has(letra.toUpperCase()) ? letra : "_";
   };
 
   return (
@@ -15,7 +15,7 @@ export default function WordDisplay({ palavra, letrasAcertadas }: WordDisplayPro
       {palavra.split("").map((letra, index) => {
         const isEspaco = letra === " " || letra === "-";
         const letraExibida = isEspaco ? letra : exibirLetra(letra);
-        const foiAcertada = letrasAcertadas.has(letra.toLowerCase());
+        const foiAcertada = letrasAcertadas.has(letra.toUpperCase());
 
         return (
           <div

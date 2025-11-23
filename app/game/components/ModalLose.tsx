@@ -22,18 +22,18 @@ export default function ModalLose({ aberto, palavra, onReiniciar }: ModalLosePro
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="text-3xl text-center text-red-600">
-            😢 Que Pena!
+            😢 QUE PENA!
           </DialogTitle>
           <DialogDescription className="text-center text-lg pt-4">
-            A porta se fechou completamente!
+            A PORTA SE FECHOU COMPLETAMENTE!
           </DialogDescription>
           <DialogDescription className="text-center pt-2">
-            A palavra era: <strong className="text-primary">{palavra}</strong>
+            A PALAVRA ERA: <strong className="text-primary">{palavra.toUpperCase()}</strong>
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="sm:justify-center">
           <Button onClick={onReiniciar} size="lg" className="w-full sm:w-auto">
-            Tentar Novamente
+            TENTAR NOVAMENTE
           </Button>
         </DialogFooter>
       </DialogContent>

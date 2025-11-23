@@ -22,18 +22,18 @@ export default function ModalWin({ aberto, palavra, onReiniciar }: ModalWinProps
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="text-3xl text-center text-green-600">
-            🎉 Parabéns! 🎉
+            🎉 PARABÉNS! 🎉
           </DialogTitle>
           <DialogDescription className="text-center text-lg pt-4">
-            Você acertou a palavra: <strong className="text-primary">{palavra}</strong>
+            VOCÊ ACERTOU A PALAVRA: <strong className="text-primary">{palavra.toUpperCase()}</strong>
           </DialogDescription>
           <DialogDescription className="text-center pt-2">
-            A menina conseguiu atravessar a porta e pegar o pirulito!
+            A MENINA CONSEGUIU ATRAVESSAR A PORTA E PEGAR O PIRULITO!
           </DialogDescription>
         </DialogHeader>
         <DialogFooter className="sm:justify-center">
           <Button onClick={onReiniciar} size="lg" className="w-full sm:w-auto">
-            Jogar Novamente
+            JOGAR NOVAMENTE
           </Button>
         </DialogFooter>
       </DialogContent>

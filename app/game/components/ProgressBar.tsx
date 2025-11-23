@@ -12,7 +12,7 @@ export default function ProgressBar({ errosAtuais, errosMaximos }: ProgressBarPr
     <div className="w-full max-w-md mx-auto my-4">
       <div className="flex justify-between items-center mb-2">
         <span className="text-sm font-medium text-foreground">
-          Erros: {errosAtuais} / {errosMaximos}
+          ERROS: {errosAtuais} / {errosMaximos}
         </span>
         <span className="text-sm font-medium text-foreground">
           {Math.round(porcentagem)}%

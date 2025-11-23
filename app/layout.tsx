@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Porta ou Pirulito",
-  description: "Jogo educativo para crianças - Adivinhe a palavra!",
+  title: "PORTA OU PIRULITO",
+  description: "JOGO EDUCATIVO PARA CRIANÇAS - ADIVINHE A PALAVRA!",
 };
 
 export default function RootLayout({
