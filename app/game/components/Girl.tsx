@@ -8,12 +8,8 @@ export default function Girl({ atravessou }: GirlProps) {
   return (
     <div
       className={`
-        absolute bottom-4 z-10 transition-all duration-1000 ease-in-out
-        ${atravessou ? "left-1/2" : "left-8"}
+        ${atravessou ? "relative" : "absolute bottom-4 left-8 z-10"}
       `}
-      style={{
-        transform: atravessou ? "translateX(-50%)" : "translateX(0)",
-      }}
     >
       {/* Cabeça */}
       <div className="w-12 h-12 bg-pink-300 rounded-full border-2 border-pink-400 relative mx-auto">

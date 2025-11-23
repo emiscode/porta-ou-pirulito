@@ -40,7 +40,7 @@ export default function GamePage() {
     iniciarNovoJogo();
   }, [iniciarNovoJogo]);
 
-  const estadoPorta = (letrasErradas.size / errosMaximos) * 100;
+  const estadoPorta = estadoJogo === "vitoria" ? 0 : (letrasErradas.size / errosMaximos) * 100;
 
   const verificarLetra = (letra: string) => {
     if (estadoJogo !== "jogando") return;
@@ -76,9 +76,9 @@ export default function GamePage() {
 
     if (todasLetrasAcertadas) {
       setEstadoJogo("vitoria");
-      // Animações de vitória
-      setTimeout(() => setAtravessou(true), 300);
-      setTimeout(() => setPirulitoPego(true), 1300);
+      // Animações de vitória: porta abre, menina atravessa e pega o pirulito
+      setTimeout(() => setAtravessou(true), 500);
+      setTimeout(() => setPirulitoPego(true), 2000);
     }
   }, [letrasAcertadas, palavraSelecionada, estadoJogo]);
 
@@ -112,12 +112,25 @@ export default function GamePage() {
         </div>
 
         {/* Porta com Menina e Pirulito */}
-        <div className="mb-8">
-          <Door estadoPorta={estadoPorta}>
-            {/* Menina e Pirulito ficam dentro e atrás da porta */}
-            <Girl atravessou={atravessou} />
-            {!pirulitoPego && <Lollipop foiPegado={pirulitoPego} />}
-          </Door>
+        <div className="mb-8 relative flex items-center justify-center">
+          <div className="relative w-full max-w-md mx-auto">
+            <Door estadoPorta={estadoPorta}>
+              {/* Menina fica dentro e atrás da porta quando não atravessou */}
+              {!atravessou && <Girl atravessou={atravessou} />}
+            </Door>
+            {/* Menina fora da porta quando atravessa */}
+            {atravessou && (
+              <div className="absolute top-1/2 right-0 transform translate-x-full translate-y-[-50%] ml-4 md:ml-8 z-10 pointer-events-none">
+                <Girl atravessou={atravessou} />
+              </div>
+            )}
+            {/* Pirulito fica do lado de fora da porta (à direita) */}
+            {!pirulitoPego && (
+              <div className="absolute top-1/2 right-0 transform translate-x-full translate-y-[-50%] ml-4 md:ml-8 z-10">
+                <Lollipop foiPegado={pirulitoPego} />
+              </div>
+            )}
+          </div>
         </div>
 
         {/* Barra de Progresso */}
