@@ -10,7 +10,7 @@ export default function Lollipop({ foiPegado }: LollipopProps) {
   }
 
   return (
-    <div className="absolute top-1/2 right-8 transform -translate-y-1/2 z-20">
+    <div className="absolute top-1/2 right-8 transform -translate-y-1/2 z-10">
       {/* Palito */}
       <div className="w-1 h-16 bg-amber-700 mx-auto" />
       

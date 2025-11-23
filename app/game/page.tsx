@@ -112,10 +112,12 @@ export default function GamePage() {
         </div>
 
         {/* Porta com Menina e Pirulito */}
-        <div className="relative mb-8 min-h-[20rem] md:min-h-[24rem]">
-          <Door estadoPorta={estadoPorta} />
-          <Girl atravessou={atravessou} />
-          {!pirulitoPego && <Lollipop foiPegado={pirulitoPego} />}
+        <div className="mb-8">
+          <Door estadoPorta={estadoPorta}>
+            {/* Menina e Pirulito ficam dentro e atrás da porta */}
+            <Girl atravessou={atravessou} />
+            {!pirulitoPego && <Lollipop foiPegado={pirulitoPego} />}
+          </Door>
         </div>
 
         {/* Barra de Progresso */}
