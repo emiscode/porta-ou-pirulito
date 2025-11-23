@@ -29,7 +29,7 @@ export default function WordDisplay({ palavra, letrasAcertadas }: WordDisplayPro
               ${foiAcertada ? "text-primary" : "text-muted-foreground"}
             `}
           >
-            {letraExibida}
+            {letraExibida.toUpperCase()}
           </div>
         );
       })}

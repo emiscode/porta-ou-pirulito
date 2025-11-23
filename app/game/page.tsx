@@ -40,7 +40,12 @@ export default function GamePage() {
     iniciarNovoJogo();
   }, [iniciarNovoJogo]);
 
-  const estadoPorta = estadoJogo === "vitoria" ? 0 : (letrasErradas.size / errosMaximos) * 100;
+  const estadoPorta = 
+    estadoJogo === "vitoria" 
+      ? 0 
+      : errosMaximos > 0 
+        ? (letrasErradas.size / errosMaximos) * 100 
+        : 0;
 
   const verificarLetra = (letra: string) => {
     if (estadoJogo !== "jogando") return;
@@ -63,12 +68,15 @@ export default function GamePage() {
 
   // Verifica vitória
   useEffect(() => {
-    if (estadoJogo !== "jogando" || palavraSelecionada === "") return;
+    if (estadoJogo !== "jogando" || palavraSelecionada === "" || letrasAcertadas.size === 0) return;
 
     const palavraLower = palavraSelecionada.toUpperCase();
     const letrasUnicas = new Set(
       palavraLower.split("").filter((l) => l !== " " && l !== "-")
     );
+
+    // Só verifica vitória se houver letras únicas na palavra
+    if (letrasUnicas.size === 0) return;
 
     const todasLetrasAcertadas = Array.from(letrasUnicas).every((letra) =>
       letrasAcertadas.has(letra)
@@ -84,7 +92,7 @@ export default function GamePage() {
 
   // Verifica derrota
   useEffect(() => {
-    if (estadoJogo !== "jogando") return;
+    if (estadoJogo !== "jogando" || errosMaximos === 0) return;
 
     if (letrasErradas.size >= errosMaximos) {
       setEstadoJogo("derrota");
@@ -104,11 +112,6 @@ export default function GamePage() {
           <p className="text-lg md:text-xl text-muted-foreground">
             ADIVINHE A PALAVRA ANTES DA PORTA SE FECHAR!
           </p>
-          <div className="mt-4">
-            <span className="inline-block px-4 py-2 bg-primary/10 text-primary rounded-full font-semibold">
-              {categoria === "fruta" ? "🍎 FRUTA" : "🐾 ANIMAL"}
-            </span>
-          </div>
         </div>
 
         {/* Porta com Menina e Pirulito */}
@@ -133,8 +136,12 @@ export default function GamePage() {
           </div>
         </div>
 
-        {/* Barra de Progresso */}
-        <ProgressBar errosAtuais={letrasErradas.size} errosMaximos={errosMaximos} />
+        {/* Barra de Progresso com Badge */}
+        <ProgressBar 
+          errosAtuais={letrasErradas.size} 
+          errosMaximos={errosMaximos} 
+          categoria={categoria}
+        />
 
         {/* Exibição da Palavra */}
         <WordDisplay palavra={palavraSelecionada} letrasAcertadas={letrasAcertadas} />

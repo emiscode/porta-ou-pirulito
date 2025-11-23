@@ -3,25 +3,35 @@
 interface ProgressBarProps {
   errosAtuais: number;
   errosMaximos: number;
+  categoria: "fruta" | "animal";
 }
 
-export default function ProgressBar({ errosAtuais, errosMaximos }: ProgressBarProps) {
-  const porcentagem = (errosAtuais / errosMaximos) * 100;
+export default function ProgressBar({ errosAtuais, errosMaximos, categoria }: ProgressBarProps) {
+  const porcentagem = errosMaximos > 0 ? (errosAtuais / errosMaximos) * 100 : 0;
 
   return (
-    <div className="w-full max-w-md mx-auto my-4">
-      <div className="flex justify-between items-center mb-2">
-        <span className="text-sm font-medium text-foreground">
+    <div className="w-full max-w-md mx-auto my-2">
+      <div className="flex items-center justify-between gap-3 text-sm">
+        {/* Badge da categoria */}
+        <span className="px-3 py-1 bg-primary/10 text-primary rounded-full font-semibold whitespace-nowrap">
+          {categoria === "fruta" ? "🍎 FRUTA" : "🐾 ANIMAL"}
+        </span>
+        
+        {/* Erros */}
+        <span className="font-medium text-foreground whitespace-nowrap">
           ERROS: {errosAtuais} / {errosMaximos}
         </span>
-        <span className="text-sm font-medium text-foreground">
+        
+        {/* Porcentagem */}
+        <span className="font-medium text-foreground whitespace-nowrap">
           {Math.round(porcentagem)}%
         </span>
       </div>
-      <div className="w-full h-4 bg-secondary rounded-full overflow-hidden">
+      {/* Barra de progresso fina */}
+      <div className="w-full h-1.5 bg-secondary rounded-full overflow-hidden mt-1.5">
         <div
           className="h-full bg-destructive transition-all duration-300 ease-out"
-          style={{ width: `${porcentagem}%` }}
+          style={{ width: `${Math.min(100, porcentagem)}%` }}
         />
       </div>
     </div>

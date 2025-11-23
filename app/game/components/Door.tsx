@@ -7,7 +7,8 @@ interface DoorProps {
 }
 
 export default function Door({ estadoPorta, children }: DoorProps) {
-  const alturaPortaFechada = estadoPorta; // 0% = porta aberta, 100% = porta fechada
+  // Garante que o valor está entre 0 e 100 e não é NaN ou Infinity
+  const alturaPortaFechada = Math.max(0, Math.min(100, isNaN(estadoPorta) || !isFinite(estadoPorta) ? 0 : estadoPorta));
 
   return (
     <div className="relative w-full max-w-md mx-auto h-64 md:h-80 bg-gradient-to-b from-blue-200 to-blue-300 rounded-lg overflow-hidden shadow-lg">
