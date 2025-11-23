@@ -13,7 +13,11 @@ export default function ProgressBar({ errosAtuais, errosMaximos, categoria }: Pr
     <div className="w-full max-w-md mx-auto my-2">
       <div className="flex items-center justify-between gap-3 text-sm">
         {/* Badge da categoria */}
-        <span className="px-3 py-1 bg-primary/10 text-primary rounded-full font-semibold whitespace-nowrap">
+        <span className={`px-3 py-1 rounded-full font-semibold whitespace-nowrap ${
+          categoria === "fruta" 
+            ? "bg-green-600 text-white" 
+            : "bg-amber-600 text-white"
+        }`}>
           {categoria === "fruta" ? "🍎 FRUTA" : "🐾 ANIMAL"}
         </span>
         

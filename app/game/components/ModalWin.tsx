@@ -10,6 +10,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
+import Lollipop from "./Lollipop";
 
 interface ModalWinProps {
   aberto: boolean;
@@ -34,7 +35,7 @@ export default function ModalWin({ aberto, palavra, onReiniciar }: ModalWinProps
         </DialogHeader>
         
         {/* Menina com pirulito na mão */}
-        <div className="flex justify-center items-center py-6">
+        <div className="flex justify-center items-center py-6 relative">
           <div className="relative w-32 h-40 md:w-40 md:h-48">
             <Image
               src="/images/girl.jpg"
@@ -43,6 +44,10 @@ export default function ModalWin({ aberto, palavra, onReiniciar }: ModalWinProps
               className="object-contain"
               priority
             />
+          </div>
+          {/* Pirulito ao lado da menina */}
+          <div className="absolute right-1 top-1/2 transform -translate-y-1/2 translate-x-[-20px] md:translate-x-[-30px]">
+            <Lollipop foiPegado={false} />
           </div>
         </div>
 
