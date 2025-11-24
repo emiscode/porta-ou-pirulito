@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { selecionarPalavraAleatoria, calcularErrosMaximos, type Categoria } from "@/lib/game-constants";
 import { useSound } from "@/lib/useSound";
+import { normalizarLetra, normalizarPalavra } from "@/lib/utils";
 import WordDisplay from "./components/WordDisplay";
 import Keyboard from "./components/Keyboard";
 import Door from "./components/Door";
@@ -59,20 +60,20 @@ export default function GamePage() {
   const verificarLetra = (letra: string) => {
     if (estadoJogo !== "jogando") return;
 
-    const letraLower = letra.toUpperCase();
-    const palavraLower = palavraSelecionada.toUpperCase();
+    const letraNormalizada = normalizarLetra(letra);
+    const palavraNormalizada = normalizarPalavra(palavraSelecionada);
 
-    // Verifica se a letra já foi usada
-    if (letrasAcertadas.has(letraLower) || letrasErradas.has(letraLower)) {
+    // Verifica se a letra já foi usada (usando a versão normalizada)
+    if (letrasAcertadas.has(letraNormalizada) || letrasErradas.has(letraNormalizada)) {
       return;
     }
 
-    // Verifica se a letra está na palavra
-    if (palavraLower.includes(letraLower)) {
-      setLetrasAcertadas((prev) => new Set([...prev, letraLower]));
+    // Verifica se a letra está na palavra (comparando versões normalizadas)
+    if (palavraNormalizada.includes(letraNormalizada)) {
+      setLetrasAcertadas((prev) => new Set([...prev, letraNormalizada]));
       playSound("correct");
     } else {
-      setLetrasErradas((prev) => new Set([...prev, letraLower]));
+      setLetrasErradas((prev) => new Set([...prev, letraNormalizada]));
       playSound("wrong");
     }
   };
@@ -81,9 +82,9 @@ export default function GamePage() {
   useEffect(() => {
     if (estadoJogo !== "jogando" || palavraSelecionada === "" || letrasAcertadas.size === 0) return;
 
-    const palavraLower = palavraSelecionada.toUpperCase();
+    const palavraNormalizada = normalizarPalavra(palavraSelecionada);
     const letrasUnicas = new Set(
-      palavraLower.split("").filter((l) => l !== " " && l !== "-")
+      palavraNormalizada.split("").filter((l) => l !== " " && l !== "-")
     );
 
     // Só verifica vitória se houver letras únicas na palavra

@@ -1,5 +1,7 @@
 "use client";
 
+import { normalizarLetra } from "@/lib/utils";
+
 interface WordDisplayProps {
   palavra: string;
   letrasAcertadas: Set<string>;
@@ -7,7 +9,9 @@ interface WordDisplayProps {
 
 export default function WordDisplay({ palavra, letrasAcertadas }: WordDisplayProps) {
   const exibirLetra = (letra: string) => {
-    return letrasAcertadas.has(letra.toUpperCase()) ? letra : "_";
+    // Normaliza a letra para verificar se foi acertada
+    const letraNormalizada = normalizarLetra(letra);
+    return letrasAcertadas.has(letraNormalizada) ? letra : "_";
   };
 
   return (
@@ -15,7 +19,8 @@ export default function WordDisplay({ palavra, letrasAcertadas }: WordDisplayPro
       {palavra.split("").map((letra, index) => {
         const isEspaco = letra === " " || letra === "-";
         const letraExibida = isEspaco ? letra : exibirLetra(letra);
-        const foiAcertada = letrasAcertadas.has(letra.toUpperCase());
+        const letraNormalizada = normalizarLetra(letra);
+        const foiAcertada = letrasAcertadas.has(letraNormalizada);
 
         return (
           <div
