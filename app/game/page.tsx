@@ -134,23 +134,24 @@ export default function GamePage() {
             <Door estadoPorta={estadoPorta}>
               {/* Menina fica dentro e atrás da porta quando não atravessou */}
               {!atravessou && <Girl atravessou={atravessou} />}
-              {/* Pirulito dentro da porta no mobile (canto superior direito) */}
-              <div className="absolute top-2 right-2 sm:top-4 sm:right-4 md:hidden z-10">
-                <Lollipop foiPegado={pirulitoPego} />
-              </div>
             </Door>
             
-            {/* Menina fora da porta quando atravessa - desktop */}
+            {/* Pirulito sempre na frente da porta - mobile (canto superior direito) */}
+            <div className="absolute top-2 -right-2 sm:top-4 sm:right-4 md:hidden z-40">
+              <Lollipop foiPegado={pirulitoPego} />
+            </div>
+            
+            {/* Pirulito sempre na frente da porta - desktop (lado direito) */}
+            <div className="hidden md:block absolute top-1/2 right-0 transform translate-x-[calc(100%+2rem)] -translate-y-1/2 z-40">
+              <Lollipop foiPegado={pirulitoPego} />
+            </div>
+            
+            {/* Menina fora da porta quando atravessa */}
             {atravessou && (
               <div className="absolute top-1/2 right-0 transform translate-x-full -translate-y-1/2 ml-2 sm:ml-4 md:ml-8 z-10 pointer-events-none">
                 <Girl atravessou={atravessou} />
               </div>
             )}
-            
-            {/* Pirulito fica do lado de fora da porta (à direita) - apenas desktop */}
-            <div className="hidden md:block absolute top-1/2 right-0 transform translate-x-[calc(100%+2rem)] -translate-y-1/2 z-10">
-              <Lollipop foiPegado={pirulitoPego} />
-            </div>
           </div>
         </div>
 
