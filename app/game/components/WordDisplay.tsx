@@ -15,7 +15,7 @@ export default function WordDisplay({ palavra, letrasAcertadas }: WordDisplayPro
   };
 
   return (
-    <div className="flex justify-center items-center gap-2 md:gap-3 flex-wrap my-2">
+    <div className="flex justify-center items-center gap-2 sm:gap-3 md:gap-3 flex-wrap my-4 px-2">
       {palavra.split("").map((letra, index) => {
         const isEspaco = letra === " " || letra === "-";
         const letraExibida = isEspaco ? letra : exibirLetra(letra);
@@ -26,9 +26,9 @@ export default function WordDisplay({ palavra, letrasAcertadas }: WordDisplayPro
           <div
             key={index}
             className={`
-              w-10 h-12 md:w-12 md:h-14
+              w-12 h-14 sm:w-14 sm:h-16 md:w-12 md:h-14
               flex items-center justify-center
-              text-2xl md:text-3xl font-bold
+              text-3xl sm:text-4xl md:text-3xl font-bold
               border-b-4 border-primary
               transition-all duration-300
               ${foiAcertada ? "text-primary" : "text-muted-foreground"}

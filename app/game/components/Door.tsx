@@ -11,7 +11,7 @@ export default function Door({ estadoPorta, children }: DoorProps) {
   const alturaPortaFechada = Math.max(0, Math.min(100, isNaN(estadoPorta) || !isFinite(estadoPorta) ? 0 : estadoPorta));
 
   return (
-    <div className="relative w-full max-w-md mx-auto h-64 md:h-80 bg-gradient-to-b from-blue-200 to-blue-300 rounded-lg overflow-hidden shadow-lg">
+    <div className="relative w-[85%] sm:w-[90%] md:w-full max-w-md mx-auto h-48 sm:h-56 md:h-80 bg-gradient-to-b from-blue-200 to-blue-300 rounded-lg overflow-hidden shadow-lg">
       {/* Conteúdo atrás da porta (menina, pirulito, etc.) */}
       {children}
       
